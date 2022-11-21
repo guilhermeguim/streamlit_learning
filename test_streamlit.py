@@ -18,4 +18,8 @@ df = pd.DataFrame(SQL_Query,columns=['custo_fabricacao','valor_venda'])
 
 st.line_chart(df)
 
-st.button('TESTE')
+if st.button('TESTE'):
+    id=conn.execute("INSERT INTO  biapzcnvuo639g5rpxcn.produtos (descricao_produto, nome_produto, lote, id_tag, custo_fabricacao, valor_venda, status,created_at) \
+                  VALUES ('Teste4', 'Teste4', 5, 4, 20.0, 15.0,'E','2022-11-21 00:00:00')")
+else:
+    pass
