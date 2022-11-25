@@ -4,9 +4,12 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
+st.set_page_config(
+    page_title="Product Manager",
+    layout='wide',
+)
+
 st.title("Product Manager")
-
-
 
 conn = create_engine("mysql://umjvmq4d8kjetiuc:mowxpy13KGH1shBOvjxF@biapzcnvuo639g5rpxcn-mysql.services.clever-cloud.com:3306/biapzcnvuo639g5rpxcn?charset=utf8mb4")
 
