@@ -1,1 +1,3 @@
 sqlalchemy==1.4.44
+streamlit==1.15.1
+
