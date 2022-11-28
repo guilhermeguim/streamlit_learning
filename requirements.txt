@@ -1,4 +1,7 @@
 streamlit==1.15.1
 sqlalchemy==1.4.44
+pandas==1.5.1
+Pillow==9.2.0
+plotly==5.11.0
 
 
