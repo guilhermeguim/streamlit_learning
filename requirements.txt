@@ -7,3 +7,4 @@ mysql-connector-python==8.0.31
 pymysql==1.0.2
 pyodbc
 mysql-connector-python-rf==2.2.2
+mysql-python
