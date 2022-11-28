@@ -3,11 +3,18 @@ import streamlit as st
 from datetime import datetime
 import pandas as pd
 import numpy as np
+from PIL import Image
+
 
 st.set_page_config(
     page_title="Product Manager",
     layout='wide',
 )
+
+image = Image.open('fho_png2.png')
+
+with st.sidebar:
+    st.image(image)
 
 st.title("Product Manager")
 
@@ -23,7 +30,7 @@ with st.form(key='tag_insert'):
 
     df = pd.DataFrame(SQL_Query)
 
-    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date']
+    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date','Target']
 
     name_list = df['Name'].tolist()
     code_list = df['Code'].tolist()
@@ -62,7 +69,7 @@ with st.form(key='tag_insert'):
 
         df = pd.DataFrame(SQL_Query)
 
-        df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date']
+        df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date','Target']
 
         name_list = df['Name'].tolist()
         code_list = df['Code'].tolist()
@@ -93,7 +100,7 @@ with st.form(key='insert'):
         
     descricao = st.text_input('Description:', '',placeholder='Type Description')
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
         
     with col1:
 
@@ -106,6 +113,10 @@ with st.form(key='insert'):
         valor = st.number_input('Sales Value:',min_value=0.00)
         valor = round(valor,2)
         
+    with col3: 
+        
+        meta  = st.number_input('Target:',min_value=0,format='%i')
+    
     col1, col2 = st.columns(2)
     
     with col1:
@@ -119,13 +130,12 @@ with st.form(key='insert'):
 
         hora = st.text_input('Hour:', value=current_time ,max_chars=8)
 
-        
     
     if st.form_submit_button(label='Submit'):
             date_time = str(data) + ' ' + str(hora)
-            id=conn.execute("INSERT INTO  biapzcnvuo639g5rpxcn.produtos (nome_produto, code, descricao_produto, categoria, custo_fabricacao, valor_venda, created_at) \
-                        VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5},'{6}')"
-                        .format(nome,codigo,descricao,categoria,custo,valor,date_time))
+            id=conn.execute("INSERT INTO  biapzcnvuo639g5rpxcn.produtos (nome_produto, code, descricao_produto, categoria, custo_fabricacao, valor_venda, created_at, meta) \
+                        VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5},'{6}',{7})"
+                        .format(nome,codigo,descricao,categoria,custo,valor,date_time,meta))
     else:
         pass
 
@@ -138,7 +148,7 @@ with st.form(key='delete'):
 
     df = pd.DataFrame(SQL_Query)
 
-    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date']
+    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date','Target']
 
     name_list = df['Name'].tolist()
     code_list = df['Code'].tolist()
@@ -160,7 +170,7 @@ with st.form(key='delete'):
 
         df = pd.DataFrame(SQL_Query)
 
-        df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date']
+        df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date','Target']
         
         name_list = df['Name'].tolist()
         code_list = df['Code'].tolist()
@@ -179,7 +189,7 @@ with st.form(key='view'):
 
     df = pd.DataFrame(SQL_Query)
 
-    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date']
+    df.columns = ['Product ID','Name','Code','Description','Category','Manufacturing Cost ($)','Sales Value ($)','Creation Date','Target']
 
     nome_filtro = st.text_input('Filter By Name:', '',placeholder='Type Name')
 
